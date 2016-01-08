@@ -1,0 +1,77 @@
+body {
+	background-color: white;
+}
+
+article {
+	width: 50%;
+	margin: auto;
+}
+
+.jeff {
+	background-color: purple;
+	font-family: "Arial";
+	font-size: 1em;
+	color: white;
+	line-height: normal;
+	padding: 0;
+	border: 1px solid black;
+	border-radius: 2px;
+}
+
+.liam {
+	background-color: darkred;
+	font-family: serif;
+	font-size: ;
+	color: ;
+	line-height: ;
+	padding: ;
+	border: ;
+	border-radius: ;
+}
+
+.charles {
+	background-color: lightblue;
+	font-family: sans-serif;
+	font-size: ;
+	color: ;
+	line-height: ;
+	padding: ;
+	border: ;
+	border-radius: ;
+}
+
+.marlon {
+	background-color: black;
+	font-family: "Helvetica", "Arial";
+	font-size: .7em;
+	color: white;
+	line-height: 1.4em;
+	padding: ;
+	border: ;
+	border-radius: ;
+}
+
+.david {
+	background-color: ;
+	font-family: "Fantasy", Arial;
+	font-size: ;
+	color: ;
+	line-height: ;
+	padding: ;
+	border: ;
+	border-radius: ;
+}
+
+
+
+/* <!-- Copy and paste your blog article HTML into the index.html file for this exercise. 
+For each article on your blog page, you need to have the following things to be unique.
+
+A different background color.
+A different font family.
+A different font size.
+A different font color.
+A different line height.
+A different padding value.
+Each should have a border, but with rounded corners of different size 
+(e.g. one article could have barely rounded borders, but the next one could be almost circular in shape) -->*/
