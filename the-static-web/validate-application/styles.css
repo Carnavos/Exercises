@@ -1,0 +1,16 @@
+.tel:required:invalid {
+	background-color: red;
+}
+
+.tel:required:valid {
+	background-color: green;
+}
+
+
+.email:required:invalid {
+	background-color: red;
+}
+
+.email:required:valid {
+	background-color: green;
+}
