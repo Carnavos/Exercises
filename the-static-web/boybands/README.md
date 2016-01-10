@@ -1,0 +1,1 @@
+This is a mock JS project for my NSS class.
