@@ -15,8 +15,10 @@
     <input id="fahrenheit" type="radio" name="type" value="fahrenheit">Fahrenheit
 
     <!-- type="button" prevented auto-reset on click (happening without type) -->
-    <button type="button" onclick="convertTemp()">Convert</button>
-    <input type="reset" onclick="clearOut()" value="Clear">
+    <!-- took out inline onclick from HTML -->
+    <button type="button" id="button">Convert</button>
+    <!-- removing inline clearout() function, adding to js file -->
+    <input type="reset" id="resetter" value="Clear">
   </form>
 <!--   <button onclick="clearOut()">Clear</button>
  -->

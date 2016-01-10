@@ -69,3 +69,45 @@ function clearOut() {
 	// Reset temperature display area to blank
 	document.getElementById("container").innerHTML = "";
 }
+
+// Prewritten Content
+
+function toCelsius () {
+	tempType = "celsius";
+	userTemp = (userTemp - 32) / 1.8;
+	console.log(userTemp);
+	return userTemp;
+}
+
+function toFahrenheit () {
+	tempType = "fahrenheit";
+	userTemp = userTemp * 1.8 + 32;
+	console.log(userTemp);
+	return userTemp;
+}
+
+// Get a reference to the button element in the DOM
+var button = document.getElementById("button");
+
+// Declaring same for reset button
+
+var resetButton = document.getElementById('resetter');
+
+// This function should determine which conversion should
+// happen based on which radio button is selected.
+function determineConverter (clickEvent) {
+	userTemp = document.getElementById('temperature').value;
+  console.log("event", clickEvent);
+  if (document.getElementById('celsius').checked) {
+  	toCelsius();
+  } else if (document.getElementById('fahrenheit').checked) {
+  	toFahrenheit();
+  }
+  update();
+}
+
+// Assign a function to be executed when the button is clicked
+button.addEventListener("click", determineConverter);
+
+// Ditto for reset button
+resetButton.addEventListener("click", clearOut);
