@@ -7,7 +7,10 @@ for (i = 1;; i++) {
 	}
 }
 
-// Fibonacci Sequence Generator
+
+
+
+// Challenge #2: Fibonacci Sequence Generator
 
 var fibs = [0];
 
@@ -18,7 +21,7 @@ for (i = 0;; i++) {
 	// adding the two most current items in fibs array together
 	var newFib = fibs[i] + fibs[j];
 
-	console.log(fibs);
+	// console.log(fibs);
 	if (i <= 1) {
 		// pushing first two 1's in the sequence
 		fibs.push(1);
@@ -26,7 +29,7 @@ for (i = 0;; i++) {
 
 		// push combination variable newFib unless over 500
 		fibs.push(newFib);
-		console.log(newFib);
+		// console.log(newFib);
 	} else {
 		console.log("end of loops");
 		// break infinite loop
@@ -35,7 +38,10 @@ for (i = 0;; i++) {
 }
 
 // display sequence
-console.log(fibs)
+console.log("Fibonacci Sequence: ", fibs);
+
+
+
 
 
 

@@ -1,35 +1,31 @@
-
+// Declare variable for sonnet element in HTML
 var sonnetElement = document.getElementById("sonnet");
 
+// Declare variable for HTML content
 var sonnetContent = sonnetElement.innerHTML;
 
-console.log(sonnetContent);
+console.log("Sonnet text: ",sonnetContent);
 
 // Finding position of "orphans"
 console.log(sonnetContent.indexOf("orphans"));
 
 
-// Test from cirriculum RegEx
-// var phrase = "The lazy dog likes the weird fox";
-// var newPhrase = phrase.replace(/o/g, "i");
-// console.log(newPhrase);
-// end snippet
-
 console.log("The number of total Sonnet characters is currently " + sonnetContent.length);
+
 
 sonnetContent = sonnetContent.replace("winter", "yuletide");
 
-console.log(sonnetContent);
+console.log("Sonnet replaced winter & yuletide: ",sonnetContent);
 
 
 sonnetContent = sonnetContent.replace(/the /g, "a large ");
 
-console.log(sonnetContent);
+console.log("Sonnet replaced 'the' with 'a large': ",sonnetContent);
 
 function updateSonnet() {
   sonnetElement.innerHTML = sonnetContent;
 	sonnetElement.style.color = "red";
-	sonnetElement.style.background = "green";
+	sonnetElement.style.backgroundColor = "green";
 }
 
 sonnetElement.addEventListener("click", updateSonnet);

@@ -24,6 +24,33 @@ function gradeAssign (array) {
 			gradeF++;
 		}
 	}
+}
+
+// Refactor attempt with case switch
+function gradeAssign2 (array) {
+	for (i = 0; i < array.length; i++) {
+		var currentScore = array[i];
+		switch (true) {
+			case (currentScore > 90):
+				gradeA++;
+				break;
+			case (currentScore > 80 && currentScore <= 90):
+				gradeB++;
+				break;
+			case (currentScore > 70 && currentScore <= 80):
+				gradeC++;
+				break;
+			case (currentScore > 60 && currentScore <= 70):
+				gradeD++;
+				break;
+			case (currentScore <= 60):
+				gradeF++;
+				break;
+			default: 
+				console.log("defaulted");
+		}
+	}
+}
 	
 	// Print amount of each grade
 	console.log("Amount of A's: " + gradeA);
@@ -31,9 +58,9 @@ function gradeAssign (array) {
 	console.log("Amount of C's: " + gradeC);
 	console.log("Amount of D's: " + gradeD);
 	console.log("Amount of F's: " + gradeF);
-}
 
-gradeAssign(scores);
+
+gradeAssign2(scores);
 
 // experimental prototype addition of the math min and max functions
 Array.prototype.max = function() {
