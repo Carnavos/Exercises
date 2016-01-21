@@ -48,22 +48,40 @@ function Card(id, input) {
 
 	// HTML Element creation
 	this.cardElement = document.createElement("div");
+	console.log(this.cardElement);
 	this.cardElement.innerHTML = this.consolidateHTML;
 
 	// console.log("testing cardElement traversal: ", cardElement.getElementsByClassName('colorPick')[0]); works
 	var backgroundButton = this.cardElement.getElementsByClassName('backgroundColorPickButton')[0];
 	console.log("backgroundButton: ", backgroundButton);
+	var fontColorPickButton = this.cardElement.getElementsByClassName('fontColorPickButton')[0];
+	console.log("fontColorPickButton: ", fontColorPickButton);
 	var deleteButton = this.cardElement.getElementsByClassName('clearButton')[0];
 	console.log("deleteButton: ", deleteButton);
 	
+	// Defining "this" scope to save for within object's functions
+	var that = this;
 	
 	// Functions for modifications
+	// Background Color
 	this.modBackgroundColor = function() {
 		var newColor = backgroundButton.value;
-		this.backgroundButtonValue = newColor;
-		console.log("newColor: ", newColor);
-		console.log("mod attempted");
-		updateDOM();
+		that.backgroundButtonValue = newColor;
+		that.cardElement.firstChild.style.backgroundColor = newColor;
+		console.log("bg newColor: ", newColor);
+		console.log("mg mod attempted");
+	};
+	// Font Color
+	this.modFontColor = function() {
+		var newColor = fontColorPickButton.value;
+		that.backgroundButtonValue = newColor;
+		that.cardElement.firstChild.style.color = newColor;
+		console.log("font newColor: ", newColor);
+		console.log("font mod attempted");
+	};
+
+	this.deleteCard = function() {
+		container.removeChild(that.cardElement);
 	};
 
 	this.workingTest = function(){
@@ -72,11 +90,16 @@ function Card(id, input) {
 
 
 	// Add internal event listeners
-	deleteButton.addEventListener("click", this.workingTest.bind(this));
+	// deleteButton.addEventListener("click", this.workingTest.bind(this)); test without bind below
+	deleteButton.addEventListener("click", this.deleteCard);
 	// Add event listener for background color change
-	backgroundButton.addEventListener("input", function(){
-		console.log("test backgroundButton event listener");
-	}); //Might need color parameter	
+	backgroundButton.addEventListener("input", this.modBackgroundColor);
+	// Add event listener for font color change
+	fontColorPickButton.addEventListener("input", this.modFontColor);	
+
+	// Append/add the object's cardElement (fully formed div element with all html and events inside) to the DOM
+	// (Also has worked outside the constructor, in the cardCreate function below as "container.appendChild(card.cardElement);")
+	container.appendChild(this.cardElement);
 };
 
 // Card create function for Create button, to be called with already established input variable
@@ -89,25 +112,23 @@ function cardCreate() {
 	// Declaring new instance of a card
 	var card = new Card(newId, userInput);
 	console.log("newCard object: ", card);
-	// Pushing new card into the array "deck," from which it will be used to update the DOM
-	cardDeck.push(card);
-	updateDOM();
 }
 
-function updateDOM(obj) {
-	// Delete the contents of the page
-	container.innerHTML = "";
 
-	// loop through the cardDeck array and add HTML to the page. intended to chain after each color change/delete.
-	for (i = 0; i < cardDeck.length; i++) {
-		console.log(cardDeck[i].cardElement);
-		container.innerHTML += cardDeck[i].consolidateHTML;
-	}
-	console.log("DOM Updated");
-};
+// Update DOM no longer needed due to appendChild and removeChild methods, which add dynamically updating elements
+	// with all object properties and event handlers to the page. When setting style, page changes dynamically; no need to reupdate/populate DOM via another method
 
+// function updateDOM(obj) {
+// 	// Delete the contents of the page
+// 	container.innerHTML = "";
 
-
+// 	// loop through the cardDeck array and add HTML to the page. intended to chain after each color change/delete.
+// 	for (i = 0; i < cardDeck.length; i++) {
+// 		console.log(cardDeck[i].cardElement);
+// 		container.innerHTML += cardDeck[i].consolidateHTML;
+// 	}
+// 	console.log("DOM Updated");
+// };
 
 
 // Add event listener for the card create button
@@ -122,7 +143,6 @@ button.addEventListener("click", cardCreate);
 // 		create a new card element in the DOM - similar to the quiz and group project. You decide the height/width of the card.
 // Above the text on each card, there must be two input controls of type color.
 // Above the text on each card, there must be a button element labeled Delete.
-
 
 // When the user selects a color from the first input, 
 //   then the background color of that card, and no other cards, should change to the color chosen.
