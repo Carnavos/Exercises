@@ -1,0 +1,12 @@
+.card {
+	text-align: center;
+	height: 200px;
+	width: 200px;
+	color: white;
+	background-color: goldenrod;
+	/*background: url("https://media4.giphy.com/media/pMIC0gYs5fBxm/200_s.gif");*/
+}
+
+/*.cardContainer {
+	background: rgba(0,0,0, .5);
+}*/
