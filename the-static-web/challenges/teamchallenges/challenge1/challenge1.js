@@ -14,22 +14,9 @@ var button = document.getElementById("button");
 var mainContent = ""; 
 var inputVal = "";
 
-// Declare empty array which will hold card objects
-var cardDeck = [];
-
-// Declare initial unique ID
-var uniqueID = 0;
-
-function idGenerator() {
-	uniqueID++;
-	console.log("idGenerator ID: ", uniqueID);
-	return uniqueID;
-}
-
 // Card Class Object Constructor
 // make sure to include the idGenerator result as the argument in subsequent call section of code
-function Card(id, input) {
-	this.uId = id;
+function Card(input) {
 	this.uInput = input;
 	this.backgroundButtonValue = "#daa520"; // Goldenrod default
 	this.fontColorPickValue = "#ffffff"; // White default
@@ -79,18 +66,14 @@ function Card(id, input) {
 		console.log("font newColor: ", newColor);
 		console.log("font mod attempted");
 	};
-
+	// Delete Card
 	this.deleteCard = function() {
 		container.removeChild(that.cardElement);
 	};
 
-	this.workingTest = function(){
-		console.log('workingTest');
-	};	
-
-
 	// Add internal event listeners
 	// deleteButton.addEventListener("click", this.workingTest.bind(this)); test without bind below
+	// Bind ended up not being needed, I think due to using "that" to determine this scope within object functions
 	deleteButton.addEventListener("click", this.deleteCard);
 	// Add event listener for background color change
 	backgroundButton.addEventListener("input", this.modBackgroundColor);
@@ -106,11 +89,8 @@ function Card(id, input) {
 function cardCreate() {
 	var userInput = document.getElementById("userInput").value;
 	console.log("userInput: ", userInput);
-	// initialize with generation of new id
-	var newId = idGenerator();
-	console.log("testing idGenerator return: ", newId);
 	// Declaring new instance of a card
-	var card = new Card(newId, userInput);
+	var card = new Card(userInput);
 	console.log("newCard object: ", card);
 }
 
