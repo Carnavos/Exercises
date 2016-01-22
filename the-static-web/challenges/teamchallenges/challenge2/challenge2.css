@@ -1,0 +1,19 @@
+.card {
+	height: 150px;
+	width: 150px;
+	display: inline-block;
+}
+
+.container1 {
+	background-color: red;
+}
+.container2 {
+	background-color: blue;
+}
+.container3 {
+	background-color: green;
+}
+
+.selected {
+	border: 3px solid black;
+}
