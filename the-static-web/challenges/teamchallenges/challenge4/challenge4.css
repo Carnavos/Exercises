@@ -1,0 +1,35 @@
+.gridBox {
+	border: 1px solid black;
+	width: 33%;
+	height: 33%;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-size: 2em;
+	background: linear-gradient(to bottom right, white, black);
+	opacity: .9;
+	color: #fff;
+  text-shadow: 2px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+.gridBox:hover {
+	opacity: .6;
+}
+
+.occupied:hover {
+	border: 2px solid red;
+}
+
+.tictacgrid {
+	margin: auto;
+	height: 300px;
+	width: 300px;
+	background-color: white;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+p {
+	text-align: center;
+	vertical-align: middle;
+}
