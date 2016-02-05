@@ -1,0 +1,16 @@
+{
+  "carnivores": [
+    {
+      "name": "Lion",
+      "dangerLevel": 8
+    },
+    {
+      "name": "Tiger",
+      "dangerLevel": 9
+    },
+    {
+      "name": "Bear",
+      "dangerLevel": 7
+    }
+  ]
+}

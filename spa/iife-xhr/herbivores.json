@@ -1,0 +1,16 @@
+{
+  "herbivores": [
+    {
+      "name": "Giraffe",
+      "plantAppetite": 8
+    },
+    {
+      "name": "MartinLawrence",
+      "plantAppetite": 9
+    },
+    {
+      "name": "Teletubby",
+      "plantAppetite": 7
+    }
+  ]
+}
