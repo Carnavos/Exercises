@@ -1,0 +1,13 @@
+.productsContainer {
+	display: inline-flex;
+	flex-wrap: wrap;
+}
+
+.product {
+	width: 30%;
+	display: inline-block;
+	border: 2px solid grey;
+	padding: 5px 10px;
+	margin: 1%;
+	box-sizing: border-box;
+}
