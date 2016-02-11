@@ -1,78 +1,53 @@
-// 'use strict'; // Strict mode
+'use strict'; // Strict mode
 
 // Declare DOM element variables
 var container = document.getElementById("container");
+var select;
+var categoriesContent = "";
 
 // Event listeners addition (in other exercises this would be on another page)
 function addEvents () {
-	// Add event for select dropdown (should be on the page by this function's invocation)
-	var select = document.querySelector(".selectDropdown");
+	select = document.querySelector(".selectDropdown");
+	// Add event for select dropdown (on the page by this function's invocation)
 	select.addEventListener("change", function(){
+		
 		var seasonValue = parseInt(this.value);
 		console.log("seasonValue log: ", seasonValue);
 
-		// get products and categories
-		var prodArray = SalesMan.getProducts().products;
-		console.log("prodArray: ", prodArray);
-		var categData = SalesMan.getCategories().categories;
-		console.log("categData: ", categData);
-		var selectedDiscount;
-
-		for (var i = 0; i < prodArray.length; i++) {
-			var currProd = prodArray[i];
-			var currElement = document.getElementById(i);
-			console.log("currElement: ", currElement);
-			var currSeason = currElement.children[1];
-			console.log("currSeason: ", currSeason);
-				// if (currSeason === )
-
-		};
-
-		// for (var i = 0; i < categData.length; i++) {
-		// 	var currentCat = categData[i];
-		// 	console.log("currentCat: ", currentCat);
-		// 	var currentSeasonId = currentCat.id;
-		// 	console.log("currentSeasonId: ", currentSeasonId);
-		// 	var currentDiscount = currentCat.discount;
-		// 	console.log("currentDiscount: ", currentDiscount);
-		// 	if (currentSeasonId === seasonValue) {
-		// 		selectedDiscount = currentDiscount;
-		// 		console.log("selectedDiscount: ", selectedDiscount);
-		// 	}
-		// }
-
-		// for (var i = 0; i < prodArray.length; i++) {
-		// 	var currentProd = prodArray[i];
-		// 	// console.log("currentProd: ", currentProd);
-		// 	var currentId = currentProd.category_id;
-		// 	if (seasonValue === currentId) {
-		// 	}
-		// }
-		// Declare elements on the page to affect
-	// 	if (this.value === prodData)
+		// run page populate in update mode
+		pagePopulate(seasonValue);
 	});
-};
+}
 
 // Separate function to use in IIFE (callback on load event, guaranteeing that the JSON data will be available by that point)
-function pagePopulate () {
+function pagePopulate (seasonValue) {
+
+	// Clear DOM
+	container.innerHTML = "";
+
 	// Get products and categories from IIFE functions
 	var productsData = SalesMan.getProducts(); 
 	var categoriesData = SalesMan.getCategories(); 
+	var catArray = categoriesData.categories;
 
 	console.log("pagePopulate Start");
 
-	// Categories Populate Section
-	var categoriesContent = `<select class="selectDropdown">`;
-	categoriesContent += `<option value="0" selected disabled>Select Season</option>`;
-	var catArray = categoriesData.categories;
-	console.log("catArray: ", catArray);
-	catArray.forEach(function(object){
-		categoriesContent += `<option value="${object.id}">${object.season_discount}</option>`;
-		console.log("object: ", object); 
-	});
-	categoriesContent += `</select>`;
-	container.innerHTML += categoriesContent;
+	// Evaluate the page's season select option (if any) while looping through objects
+	// THEN populate to page
 
+	// Categories Populate Section (only if it hasn't loaded before)
+	if (categoriesContent === "") {
+		categoriesContent = `<select class="selectDropdown">`;
+		categoriesContent += `<option value="0" selected disabled>Select Season</option>`;
+		console.log("catArray: ", catArray);
+		catArray.forEach(function(object){
+			categoriesContent += `<option value="${object.id}">${object.season_discount}</option>`;
+			console.log("object: ", object); 
+		});
+		categoriesContent += `</select>`;
+	}
+	// Keeping this outside if statement to keep categories on page as first content
+	container.innerHTML += categoriesContent;
 
 	// Products Populate Section
 	var productsContent = `<div class='productsContainer'>`;
@@ -85,15 +60,22 @@ function pagePopulate () {
 		productsContent += `<p>Product Name: ${currProd.name}</p>`;
 		// Briefly dip into the categories array to find the product's matching category type 
 		var catId = currProd.category_id;
+		var displayPrice = currProd.price;
 		var catName;
+		var catDiscount;
 		catArray.forEach(function(element){
 			if (element.id === catId) {
 				catName = element.name;
 				console.log("catName: ", catName);
+				catDiscount = element.discount;
 			}
 		});
+		if (catId === seasonValue) {
+			displayPrice = (currProd.price - (currProd.price * catDiscount)).toFixed(2);
+			console.log("displayPrice: ", displayPrice);
+		};
 		productsContent += `<p class="department" value="${catId}">Department: ${catName}</p>`;
-		productsContent += `<p class="price">Price: ${currProd.price}</p>`;
+		productsContent += `<p class="price">Price: ${displayPrice}</p>`;
 		productsContent += `</div>`;
 	}
 
@@ -124,7 +106,6 @@ var SalesMan = (function () {
 					products = JSON.parse(this.responseText);
 					console.log("Products Loaded");
 					console.log("productsData: ", products);
-					// SalesMan.loadCategories();
 					callback();
 				});
 			} else {
@@ -146,7 +127,7 @@ var SalesMan = (function () {
 					categories = JSON.parse(this.responseText);
 					console.log("Categories Loaded");
 					console.log("categoriesData: ", categories);
-					pagePopulate();
+					pagePopulate(0);
 				});
 			} else {
 				console.log("categories else statement");
@@ -169,7 +150,6 @@ var SalesMan = (function () {
 
 // Call functions; first actions which run on the page
 SalesMan.loadProducts(SalesMan.loadCategories);
-// SalesMan.loadCategories(pagePopulate);
 
 // Your job is to build a web page that lists all of the products, the name of the department it's in, and the price. 
 // Additionally, put a <select> element at the top of the page that contains all possible values of the season_discount key in the categories file. 
