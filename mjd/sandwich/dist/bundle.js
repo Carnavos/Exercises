@@ -11,8 +11,6 @@ let breadPrices = {
 };
 
 let addBread = function(choice) {
-  // console.log("addBread init");
-  // console.log("breadPrices[choice]: ", breadPrices[choice]);
   SandwichMaker.addTopping(breadPrices[choice])
   return breadPrices[choice];
 };
@@ -40,7 +38,7 @@ module.exports = addCheese;
 'use strict';
 let SandwichMaker = require('./sandwichMaker');
 
-var condimentsPrices = {
+let condimentsPrices = {
   "catsup": 1.90,
   "mustard": 1.40,
   "mayo": 1.00,
@@ -54,27 +52,6 @@ let addCondiments = function(choice) {
 
 module.exports = addCondiments;
 },{"./sandwichMaker":5}],4:[function(require,module,exports){
-// // This SandwichMaker IIFE augments the original one
-// var SandwichMaker = (function(maker) {
-
-//   // Private variable to store the different meat prices
-//   var meatPrices = {
-//     "ham": 1.30,
-//     "turkey": 1.40,
-//     "roastBeef": 1.60,
-//     "meatball": 1.90
-//   };
-
-//   // Augment the original object with another method
-//   maker.addMeat = function(choice) {
-//     SandwichMaker.addTopping(meatPrices[choice])
-//     return meatPrices[choice];
-//   };
-
-//   // Return the new, augmented object with the new method on it
-//   return maker;
-// })(SandwichMaker);
-
 'use strict';
 
 let SandwichMaker = require("./sandwichMaker");
@@ -94,8 +71,8 @@ let addMeat = function(choice) {
 module.exports = addMeat;
 },{"./sandwichMaker":5}],5:[function(require,module,exports){
 'use strict';
-// Variable declaration
-var SandwichMaker = {
+// initial methods and private price variable
+let SandwichMaker = {
   totalPrice: 0,
 
   addTopping (toppingPrice) {
@@ -112,33 +89,16 @@ var SandwichMaker = {
   },
   
 };
+// export intial sandwichMaker object to use in modules (only addTopping is used)
 module.exports = SandwichMaker;
-console.log("SandwichMaker load test");
-// module.exports = SandwichMaker;
 
+// "require" method (made available by browserify install), returns only the exported value in each module.
+// in this case, the export is a function, accepting one "choice" argument
 let Meat = require("./meat");
-// console.log("Meat test: ", Meat);
-// console.log(Meat("ham"));
-
 let Bread = require("./bread");
-// console.log("Bread test: ", Bread);
-// console.log(Bread("wheat"));
-
 let Veggies = require("./veggies");
-// console.log("Veggies test: ", Veggies);
-// console.log(Veggies("lettuce"));
-
 let Cheese = require("./cheese");
-// console.log("Cheese test: ", Cheese);
-// console.log(Cheese("swiss"));
-
 let Condiments = require("./condiments");
-// console.log("Condiments test: ", Condiments);
-// console.log(Condiments("catsup"));
-
-
-// old primary.js
-
 
 // Declare initial variables
 let container = document.getElementById("container");
@@ -156,12 +116,7 @@ let finalSandwichPrice = 0;
 // Variable to hold toppings (of the same type) that the user selects
 let selectedToppings;
 
-/* Cirriculum Note: 
-  A <select> element broadcasts a change event, so you listen for it
-  and get the value of the topping from your augmented IIFE
-*/
-
-// Master function to be called for each selector change
+// function to be called for each selector change
 function choiceHandler(element) {
   // Reset DOM and totalPrice
   container.innerHTML = '';
@@ -169,35 +124,37 @@ function choiceHandler(element) {
 
   // Get the values chosen from the DOM
   // forEach with if statement for each topping, running correlating method to send user selection and return one price per call
-  selectors.forEach(function(element){
+  selectors.forEach((element) => {
     // Declare local variable for collection of options 
     // *HTML COLLECTION* - can only use .length and .item(index) instead of normal array methods
-    var selectedToppings = element.selectedOptions;
+    let selectedToppings = element.selectedOptions;
 
-    var elementName = element.name;
+    let elementName = element.name;
 
-    for (var i = 0; i < selectedToppings.length; i++) {
+    for (let i = 0; i < selectedToppings.length; i++) {
       // Declare variable for current item's value in HTML Collection 
-      var currentTopping = selectedToppings.item(i).value;
+      let currentTopping = selectedToppings.item(i).value;
       // Declare variable for current item's name in HTML Collection (used in DOM injection)
-      var currentToppingName = selectedToppings.item(i).text;
-      // Declare private variable for addMeat call with currentTopping value argument
+      let currentToppingName = selectedToppings.item(i).text;
+      // Declare empty variable to use in switch statement
+      let foodComponent;
+      // switch statement to call upon required modules for individual topping add methods
       switch (elementName)  {
         case "Bread": 
-        var foodComponent = Bread(currentTopping);
-        break;
+          foodComponent = Bread(currentTopping);
+          break;
         case "Meat": 
-        var foodComponent = Meat(currentTopping);
-        break;
+          foodComponent = Meat(currentTopping);
+          break;
         case "Cheese": 
-        var foodComponent = Cheese(currentTopping);
-        break;
+          foodComponent = Cheese(currentTopping);
+          break;
         case "Veggies": 
-        var foodComponent = Veggies(currentTopping);
-        break;
+          foodComponent = Veggies(currentTopping);
+          break;
         case "Condiments": 
-        var foodComponent = Condiments(currentTopping);
-        break;
+          foodComponent = Condiments(currentTopping);
+          break;
       } 
       // Update the DOM with Current Topping and Food Component (addMeat should update the final price)
       container.innerHTML += `<p>Add ${currentToppingName}: $${foodComponent.toFixed(2)}</p>`;
@@ -205,16 +162,12 @@ function choiceHandler(element) {
   });
   // Add final price to the DOM outisde of the selectors loop
   container.innerHTML += `<p>Sandwich Total Price: $${SandwichMaker.getTotalPrice().toFixed(2)}</p>`;
-  // console.log("selectedTopping: ", selectedToppings);
-
-
 
 };
 
-// experimental forEach event listener add
-selectors.forEach(function(element){
+// forEach event listener add
+selectors.forEach((element) =>{
   element.addEventListener("change", choiceHandler);
-  // console.log("element.name: ", element.name);
 });
 
 

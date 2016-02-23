@@ -10,8 +10,6 @@ let breadPrices = {
 };
 
 let addBread = function(choice) {
-  // console.log("addBread init");
-  // console.log("breadPrices[choice]: ", breadPrices[choice]);
   SandwichMaker.addTopping(breadPrices[choice])
   return breadPrices[choice];
 };

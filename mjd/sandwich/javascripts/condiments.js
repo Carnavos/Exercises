@@ -1,7 +1,7 @@
 'use strict';
 let SandwichMaker = require('./sandwichMaker');
 
-var condimentsPrices = {
+let condimentsPrices = {
   "catsup": 1.90,
   "mustard": 1.40,
   "mayo": 1.00,
