@@ -1,46 +1,53 @@
 'use strict';
 
-function Plant () {
-	this.height = 0;
-}
-
-function Tree () {
-	this.grown = 0;
-	this.branches = 0;
-}
-
-// setting up prototypical chain between Plant and Tree
-Tree.prototype = new Plant();
-
-Plant.prototype.increaseHeight = function(growth) {
-	this.height += growth;
-	console.log("this.height: ", this.height);
-};
-
-Plant.prototype.decreaseHeight = function(cut) {
-	this.height -= cut;
-};
-
-Tree.prototype.grow = function(amount) {
-	this.increaseHeight(amount);
-	this.grown += amount;
-	if (this.grown >= 10) {
-		this.branches++;
-		this.grown -= 10;
+class Plant {
+	// set up to receive when Tree is called (no individual calls on Plant)
+	constructor (height) {
+		this.height = height;
 	}
-};
+	increaseHeight (growth) {
+		this.height += growth;
+		console.log("this.height: ", this.height);
+	}
+	decreaseHeight (cut) {
+		this.height -= cut;
+	}
+}
 
-Tree.prototype.trim = function(amount) {
-	this.decreaseHeight(amount);
-	this.branches--;
-	console.log("Trees Trimmed");
-};
+// function Plant () {
+// 	this.height = 0;
+// }
 
-let PearTree = new Tree();
-PearTree.height = 40;
+class Tree extends Plant {
+	// constructor is for Tree (initial class), super is for Plant (parent Class)
+	constructor(height) {
+		super(height);
+		this.grown = 0;
+		this.branches = 0;
+	}
+	// grow method
+	grow (amount) {
+		this.increaseHeight(amount);
+		this.grown += amount;
+		if (this.grown >= 10) {
+			this.branches++;
+			this.grown -= 10;
+		}		
+	}
+	// trim method
+	trim (amount) {
+		this.decreaseHeight(amount);
+		this.branches--;
+		console.log("Trees Trimmed");		
+	}
+}
 
-let OakTree = new Tree();
-OakTree.height = 70;
+let PearTree = new Tree(40);
+console.log("PearTree: ", PearTree);
+// PearTree.height = 40;
+
+let OakTree = new Tree(70);
+// OakTree.height = 70;
 
 let counter = 0;
 
@@ -81,16 +88,4 @@ $(document).ready(() => {
 	var growTimer = setInterval(growTrees, 1000);
 
 });
-
-
-let tedTree = new Tree(20);
-console.log("initial ted's tree height: ", tedTree.height);
-tedTree.grow(3);
-console.log("ted's tree height: ", tedTree.height);
-tedTree.grow(5);
-console.log("ted's tree height: ", tedTree.height);
-tedTree.trim(6);
-console.log("ted's tree height: ", tedTree.height);
-console.log("ted's tree branches: ", tedTree.branches);
-console.log("ted's tree: ", tedTree);
 
