@@ -4,8 +4,7 @@ function Plant () {
 	this.height = 0;
 }
 
-function Tree (height) {
-	this.height = height;
+function Tree () {
 	this.grown = 0;
 	this.branches = 0;
 }
@@ -15,6 +14,7 @@ Tree.prototype = new Plant();
 
 Plant.prototype.increaseHeight = function(growth) {
 	this.height += growth;
+	console.log("this.height: ", this.height);
 };
 
 Plant.prototype.decreaseHeight = function(cut) {
@@ -36,8 +36,11 @@ Tree.prototype.trim = function(amount) {
 	console.log("Trees Trimmed");
 };
 
-let PearTree = new Tree(50);
-let OakTree = new Tree(70);
+let PearTree = new Tree();
+PearTree.height = 40;
+
+let OakTree = new Tree();
+OakTree.height = 70;
 
 let counter = 0;
 
