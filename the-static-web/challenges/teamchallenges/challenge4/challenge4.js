@@ -20,9 +20,6 @@ var stalemate = [];
 var pole = "";
 
 
-var jeffCheck = ["jeff"].includes("jeff");
-console.log("jeffCheck: ", jeffCheck);
-
 function winConditionTest(array) {
 	// columns left to right, rows top to bottom, diagonals
 	if ((array.includes(0) && array.includes(3) && array.includes(6)) || 
@@ -42,45 +39,54 @@ function winConditionTest(array) {
 
 
 
-// Gameplay function to determine X/O and win conditions, passed with the object argument from constructed boxes
+// Gameplay function to determine X/O and win conditions, called with the object argument from constructed boxes
 var gamePlay = function(obj) {
 	console.log("gamePlay init");
 	// Log clicked element
 	console.log("this place: ", obj.place);
-
+	console.log("tictacgrid.children: ", tictacgrid.children);
+	console.log("pre if statement obj.character: ", obj.character);
 	if (obj.character === "") {
 		// Alternate between state X/O and store within object
 		// Log the space in available spaces array
-		stalemate.push(obj.place);
 		console.log("stalemate array: ", stalemate);
 		if (pole === "X") {
 			obj.character = "X";
 			xArray.push(obj.place);
 			pole = "O";
-			if (winConditionTest(xArray)) {
-				alert("Player X Wins");
-				// tictacgrid.children.classList.add("occupied");
-				// tictacgrid.children.forEach(function(element){
-				// 	element.classList.add("occupied");
-				// });
-			}
 		} else if (pole === "O") {
 			obj.character = "O";
 			oArray.push(obj.place);
 			pole = "X";
-		}
+		} else {
+			// Else statement when the space is already taken	
+			console.log("space occupied");
+		}		
+		obj.gridElement.classList.add("occupied");
 	} else {
-		console.log("space taken");
-	} // Else statement when the space is already taken
+		console.log("Test Disabled Click Log");
+	}
 
 	// Add occupied class to the square and object
-	obj.gridElement.classList.add("occupied");
 
 	// Add current character to the inner HTML
 	console.log("obj.character", obj.character);
 	obj.gridElement.innerHTML = `<p>${obj.character}</p>`;
 
-
+	// Win/Stalemate Checks
+	stalemate.push(obj.place);
+	if (winConditionTest(xArray)) {
+		alert("Player X Wins");
+		disableAll();
+	} else if (winConditionTest(oArray)) {
+		alert("Player O Wins");
+		disableAll();
+	}
+	if (stalemate.length >= 9) {
+		alert("Stalemate!");
+		disableAll();
+	}
+		// Add reset
 };
 
 
@@ -129,6 +135,28 @@ function gridInit() {
 	};
 	// Clean off board and reset initial character to X
 	pole = "X";
+	xArray = [];
+	oArray = [];
+	stalemate = [];
+};
+
+function disableAll() {
+	console.log("disableAll init");
+	var ticTacChildren = tictacgrid.children; //HTML Collection
+	for (var i = 0; i < ticTacChildren.length; i++) {
+		var currentChild = ticTacChildren[i];
+		currentChild.classList.add("occupied");
+	};
+	// Loop through objects and change obj.character to J (in order to disable gamePlay if statement)
+	console.log("gridValues: ", gridValues);
+	for (var i = 0; i < gridValues; i++) {
+	var currentBox = gridValues[i];
+	console.log("currentBox: ", currentBox);
+	currentBox.character = "J"; 
+	console.log("currentBox.character: ", currentBox.character);
+	};
+	console.log("Post gridValues: ", gridValues);
+
 };
 
 // Manually add each box object to the gridValues array

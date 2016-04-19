@@ -90,7 +90,6 @@ function toFahrenheit () {
 var button = document.getElementById("button");
 
 // Declaring same for reset button
-
 var resetButton = document.getElementById('resetter');
 
 // This function should determine which conversion should

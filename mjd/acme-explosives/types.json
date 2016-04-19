@@ -1,0 +1,40 @@
+{
+  "types": [
+    {
+      "id": 0,
+      "category": 0,
+      "name": "guitars",
+      "description": "Types of guitars"
+    },
+    {
+      "id": 1,
+      "category": 0,
+      "name": "basses",
+      "description": "Types of basses"
+    },
+    {
+      "id": 2,
+      "category": 0,
+      "name": "cellos",
+      "description": "Types of cellos"
+    },
+    {
+      "id": 3,
+      "category": 1,
+      "name": "orchestral",
+      "description": "Types of orchestral percussion"
+    },
+    {
+      "id": 4,
+      "category": 1,
+      "name": "drumset",
+      "description": "Types of drumset setups"
+    },
+    {
+      "id": 5,
+      "category": 1,
+      "name": "marching",
+      "description": "Types of marching band percussion"
+    }
+  ]
+}

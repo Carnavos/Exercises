@@ -1,1 +1,0 @@
-NSS app practiciing object constructors.
