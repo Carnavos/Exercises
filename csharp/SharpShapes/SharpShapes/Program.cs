@@ -12,12 +12,32 @@ namespace SharpShapes
         {
             List<Shape> Shapes = new List<Shape>();
             Shapes.Add(new Circle());
-            
+            Shapes.Add(new Square());
+            Shapes.Add(new Cube());
+
             foreach (Shape item in Shapes)
             { Console.WriteLine("{0}. {1}", Shapes.IndexOf(item) + 1, item.name); }
             //Shapes.Add(new Square());
-            Console.WriteLine("Please select a shape");
-            var userChoice = Console.ReadKey();
+
+            Console.WriteLine("Please select a shape (number)");
+            int userChoice = Int32.Parse(Console.ReadLine()); // was using ReadKey (not as good)
+            // need line break
+            //Console.WriteLine("The number you picked was {0}", userChoice);
+            Shape chosenShape = Shapes[userChoice - 1];
+            Console.Clear();
+            Console.WriteLine("You chose {0}", chosenShape.name);
+            Console.WriteLine(chosenShape.prompt);
+            string userInputs = Console.ReadLine();
+            Console.WriteLine("user inputs: {0}", userInputs);
+            // split user inputs
+            string[] userInputsStringArray = userInputs.Split(','); // need to use '' for char
+            int[] userInputsIntArray = Array.ConvertAll<string, int>(userInputsStringArray, int.Parse);
+            if (userInputsIntArray.Length > chosenShape.numOfInputs) { Console.WriteLine("Too many inputs"); }
+            // user chosen shape's designated output calculator and display results in concat string
+            else { Console.WriteLine("{0} {1} {2}. {3} sides", chosenShape.resultText, chosenShape.calculateOutput(userInputsIntArray), chosenShape.units, chosenShape.numOfSides); }
+            // Program End Stopper
+            Console.ReadKey();
+
         }
     }
 }
