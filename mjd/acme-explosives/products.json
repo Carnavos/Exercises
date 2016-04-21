@@ -1,0 +1,112 @@
+{
+  "products": [
+		{  
+        "id": 0,
+        "type": 0,
+        "name": "PRS",
+        "description": "PRS Guitars."
+    },
+		{  
+        "id": 1,
+        "type": 0,
+        "name": "Gibson",
+        "description": "Gibson Guitars."
+    },
+		{  
+        "id": 2,
+        "type": 0,
+        "name": "Martin",
+        "description": "Martin Guitars"
+    },
+		{  
+        "id": 3,
+        "type": 1,
+        "name": "Fodera",
+        "description": "Fodera Basses."
+    },
+		{  
+        "id": 4,
+        "type": 1,
+        "name": "Commercial Grade Dynamite",
+        "description": "Warick basses."
+    },
+		{  
+        "id": 5,
+        "type": 1,
+        "name": "Industrial Grade Dynamite",
+        "description": "Rickenbacker basses."
+    },
+		{  
+        "id": 6,
+        "type": 2,
+        "name": "Stentor",
+        "description": "As one of the more popular brands of violin family instruments, many teachers respect Stentor cellos as good beginner instruments."
+    },
+		{  
+        "id": 7,
+        "type": 2,
+        "name": "Primavera",
+        "description": "Primavera cellos, while less expensive than Stentor models, also sacrifice some quality."
+    },
+		{  
+        "id": 8,
+        "type": 2,
+        "name": "Cecilio",
+        "description": "For a student brand, Cecilio cellos certainly fit the bill and are a celebrated brand by teachers and students alike."
+    },
+		{  
+        "id": 9,
+        "type": 3,
+        "name": "Marimba",
+        "description": "Marimba description."
+    },
+		{  
+        "id": 10,
+        "type": 3,
+        "name": "Vibraphone",
+        "description": "Vibraphone description."
+    },
+		{  
+        "id": 11,
+        "type": 3,
+        "name": "Timpani",
+        "description": "Timpani description."
+    },
+		{  
+        "id": 12,
+        "type": 4,
+        "name": "Pearl Drums",
+        "description": "Pearl description."
+    },
+		{  
+        "id": 13,
+        "type": 4,
+        "name": "Ludwig Drums",
+        "description": "Ludwig description."
+    },
+		{  
+        "id": 14,
+        "type": 4,
+        "name": "Crush Drums",
+        "description": "Timpani description."
+    },
+		{  
+        "id": 15,
+        "type": 5,
+        "name": "Tenor Drums",
+        "description": "Tenor Drums description."
+    },
+		{  
+        "id": 16,
+        "type": 5,
+        "name": "Bass Drums",
+        "description": "Bass Drums description."
+    },
+		{  
+        "id": 17,
+        "type": 5,
+        "name": "Snare Drums",
+        "description": "Snare Drums description."
+    }
+  ]
+}
