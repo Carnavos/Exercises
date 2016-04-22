@@ -10,7 +10,21 @@ namespace Alphabits
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter each letter of the alphabet lowercase in order from a to z");
+            // declare an alphabet object instance (methods contained within)
+            alphabetClass theAlphabet = new alphabetClass();
+
+            while (!theAlphabet.alphabetComplete())
+            {
+                Console.WriteLine("Enter each letter of the alphabet lowercase in order from a to z");
+                // Console.WriteLine that shows if there's an invalid entry
+                Console.Write("Current Alphabet Progress: ");
+                theAlphabet.alphabetList.ForEach(item => Console.Write(item));
+                // Console.WriteLine("Enter the next character: ");
+                char testChar = Console.ReadKey().KeyChar;
+                theAlphabet.addChar(testChar, theAlphabet.alphabetList);
+                Console.WriteLine("You entered {0}", testChar);
+                Console.Clear();
+            }
         }
     }
 }
