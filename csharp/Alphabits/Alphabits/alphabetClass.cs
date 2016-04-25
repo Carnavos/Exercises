@@ -12,17 +12,44 @@ namespace Alphabits
     public class alphabetClass
     {
         public List<char> alphabetList = new List<char>();
-
+        public bool validState { get; set; }
+        public string errorText { get; set; }
         private int currentProgressInt { get; set; }
+        private char _newChar;
+        public char NewChar
+        {
+            get { return _newChar; }
+            set
+            {
+                if (!char.IsLetter(value))
+                {
+                    throw new ArgumentException("Character entered not a letter");
+                }
+                if (value < currentProgressInt)
+                {
+                    throw new ArgumentException("New letter must be next letter in the alphabet");
+                }
+                if (value > currentProgressInt + 1)
+                {
+                    throw new ArgumentException("New letter must immediately follow current letter in the alphabet");
+                }
+                if (value == currentProgressInt)
+                {
+                    throw new ArgumentException("Same letter, enter the next letter in alphabet");
+                }
+                _newChar = value;
+            }
+        }
         public alphabetClass()
         {
-            currentProgressInt = 0; // must start at "a" (represented by a number)
+            validState = true;
+            currentProgressInt = 96; // must start at "a" (represented by a number)
         }
 
         public bool validCharCheck(char charToTest)
         {
-            //return charToTest > currentProgressInt && char.IsLetter(charToTest);
-            return true;
+            return (charToTest == currentProgressInt + 1) && char.IsLetter(charToTest);
+            //return true;
         }
         
         public bool alphabetComplete()
@@ -33,23 +60,27 @@ namespace Alphabits
         public void addChar (char character, List<char> alphabet)
         {
           // logic to add character to the larger string
-          //if (validCharCheck(character))
-        if (true)
-        {
-                // Console.Clear();
-                // Console.WriteLine("Valid Character!");
-                alphabetList.Add(character);
-        }
-        else
-        {
-            Console.WriteLine("Invalid Character :(");
+          // should be a try/catch block
+            alphabetList.Add(character);
+            // toggle invalid prompt off
+            currentProgressInt++;
+            validState = true;
         }
 
-    }
+        public int listLength ()
+        {
+            // logic to display the length of the Alphabet List as is currently
+            return alphabetList.Count;
+        }
+        public List<char> returnList ()
+        {
+            return alphabetList;
+        }
 
-    public void listLength (List<string> alphaList)
-    {
-        // logic to display the length of the alphabet List as is currently
-    }
+        // experimental
+        //public string returnErrorText()
+        //{
+        //    return errorText;
+        //}
     }
 }

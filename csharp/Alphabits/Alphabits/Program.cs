@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Alphabits
 {
@@ -16,15 +17,40 @@ namespace Alphabits
             while (!theAlphabet.alphabetComplete())
             {
                 Console.WriteLine("Enter each letter of the alphabet lowercase in order from a to z");
+
                 // Console.WriteLine that shows if there's an invalid entry
-                Console.Write("Current Alphabet Progress: ");
+                // String exceptionText = theAlphabet.returnErrorText();
+                String errorMessage = String.Format("Invalid Character: {0}", theAlphabet.errorText);
+                if (!theAlphabet.validState) Console.WriteLine(errorMessage);
+
+                if (theAlphabet.listLength() > 0) { Console.Write("Current Alphabet Progress: {0}", theAlphabet.listLength()); };
+
+                // break line
+                Console.WriteLine();
                 theAlphabet.alphabetList.ForEach(item => Console.Write(item));
+
                 // Console.WriteLine("Enter the next character: ");
-                char testChar = Console.ReadKey().KeyChar;
-                theAlphabet.addChar(testChar, theAlphabet.alphabetList);
-                Console.WriteLine("You entered {0}", testChar);
+                // char testChar = Console.ReadKey().KeyChar;
+
+                try
+                {
+                    // validation on NewChar setter, throws argument exception if invalid, adds through addChar if 
+                    theAlphabet.NewChar = Console.ReadKey().KeyChar;
+                    theAlphabet.addChar(theAlphabet.NewChar, theAlphabet.alphabetList);
+
+                }
+                catch (ArgumentException exception)
+                {
+                    // sets error message instead of directly writing to console
+                    theAlphabet.validState = false;
+                    theAlphabet.errorText = exception.Message;
+                }
+                Console.WriteLine("You entered {0}", theAlphabet.NewChar);
                 Console.Clear();
             }
+            Console.WriteLine("Alphabet Complete: Program Terminating...");
+            // put window to sleep... permanently
+            Thread.Sleep(3000);
         }
     }
 }
