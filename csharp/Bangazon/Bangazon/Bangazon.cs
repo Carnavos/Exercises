@@ -90,9 +90,7 @@ namespace Bangazon
             {
                 case 1:
                     // Account Creation Menu Method (should include the clear lines within method)
-                    Console.Clear();
-                    Console.WriteLine("Create an account menu");
-                    Console.ReadKey();
+                    accountMenuHandler();
                     break;
                 case 2:
                     // Payment Option Menu Method
@@ -123,9 +121,39 @@ namespace Bangazon
             }
         }
 
-        public void accountMenuHandler (string input)
+        // could return the account to use for orders later on
+        public void accountMenuHandler ()
         {
+            // clear screen
+            Console.Clear();
+
             // account menu prompts
+            // account creation
+            Account newAccount = new Account();
+
+            // set properties
+            Console.WriteLine("Enter customer full name");
+            newAccount.FullName = Console.ReadLine();
+
+            Console.WriteLine("Enter street address");
+            newAccount.StreetAddress = Console.ReadLine();
+
+            Console.WriteLine("Enter city");
+            newAccount.City = Console.ReadLine();
+
+            Console.WriteLine("Enter state");
+            newAccount.State = Console.ReadLine();
+
+            Console.WriteLine("Enter phone number");
+            newAccount.PhoneNumber = Console.ReadLine();
+
+            // insert into database
+
+            // completion message
+            Console.WriteLine("Account created successfully");
+
+            // (timeout) return to previous menu
+            Thread.Sleep(1000);
         }
     }
 }
